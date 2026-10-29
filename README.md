@@ -28,9 +28,10 @@ Each idea is tracked and expanded as a structured [GitHub Issue](https://github.
 
 ### 🛠️ Developer Tools & Project Upgrades
 
-| Issue | Concept | Target Project | Planned Upgrades |
+| Issue | Concept | Target / Stack | Core Hook & Planned Features |
 | :--- | :--- | :--- | :--- |
 | **[#3](https://github.com/johnstrand/ideas/issues/3)** | **Update SQL Server audit tool** | **[`sqlsrvaudit`](https://github.com/johnstrand/sqlsrvaudit)** | 1. **Self-Contained Interactive HTML Report (`--format html`)** with live severity/category/window filtering, object search, and one-click copyable SQL fix scripts.<br>2. **Execution Plan XML & T-SQL Anti-Pattern Checks** (`CONVERT_IMPLICIT`, key lookup hotspots, non-SARGable predicates, missing-index consolidation).<br>3. **Offline Snapshot Re-Analysis (`analyze --snapshot`)** and **Multi-Database / Instance-Wide Batch Scanning**. |
+| **[#7](https://github.com/johnstrand/ideas/issues/7)** | **Simple 3d editor for games** | C# / .NET 10 • Raylib-cs • ImGui.NET | *TrenchBroom* meets *Blender* for simple 3D games: single Perspective/Ortho (`X`/`Y`/`Z`) viewport, parametric primitives, half-edge N-gon vertex/edge/face editing, draggable 3D transform gizmo handles + `X`/`Y`/`Z` (`Shift+` plane) locks, CSG mesh booleans, auto-planar UV texturing, `player_spawn`/`light`/`portal` entities, per-element key-value metadata, built-in First-Person Walk preview, and a dual-layer JSON level format. |
 
 ---
 
