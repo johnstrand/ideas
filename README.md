@@ -12,9 +12,8 @@ Each idea is tracked and expanded as a structured [GitHub Issue](https://github.
 
 | Issue | Concept | Genre & Perspective | Core Hook | Related Repos |
 | :--- | :--- | :--- | :--- | :--- |
-| **[#1](https://github.com/johnstrand/ideas/issues/1)** | **Space war sim thingy** | 3D Tactical Fleet Command + Sector Roguelite | *Homeworld* / *Nebulous: Fleet Command* style 3D positional combat with Tactical Pause, signature/E-warfare shenanigans (radar spoofing, cold-drift ambushes, active jamming), physicalized ballistics, localized subsystem damage, and a persistent ragtag fleet campaign. | [`AstroGuardian`](https://github.com/johnstrand/AstroGuardian) |
-| **[#2](https://github.com/johnstrand/ideas/issues/2)** | **3D first person asteroids** | 6DoF Cockpit Arcade Roguelite | Classic toroidal wrap-around *Asteroids* reimagined inside a diegetic 3D fighter cockpit with a 3D holographic radar globe, toggleable Flight-Assist / Newtonian drift, momentum-conserving rock fracturing, ore-driven between-wave upgrades, and UFO hunter/boss waves. | — |
-| **[#4](https://github.com/johnstrand/ideas/issues/4)** | **2d squad based shooter** | 2D Top-Down Real-Time-with-Pause (RTwP) CQB Roguelite | *Door Kickers* + *XCOM* meets `RootinTootin`: command a 4-operator squad across procedural floors with waypoint path drawing, decoupled firing cones, synchronized Go-Code room breaches, directional cover/suppression, and GPU raymarched line-of-sight fog of war. | [`rootintootin-public`](https://github.com/johnstrand/rootintootin-public) |
+| **[#4](https://github.com/johnstrand/ideas/issues/4)** | **2d squad based shooter** | 2D Top-Down Real-Time-with-Pause (RTwP) CQB Roguelite | *Door Kickers* + *XCOM* meets `RootinTootin`: command a 4-operator squad across procedural floors with waypoint path drawing, decoupled firing cones, synchronized Go-Code room breaches, directional cover/suppression, and GPU raymarched line-of-sight fog of war. (Issues tagged `<model>-<effort>`). | [`rootintootin-public`](https://github.com/johnstrand/rootintootin-public) |
+| **[#6](https://github.com/johnstrand/ideas/issues/6)** | **Rules-driven turned based combat game** | Turn-Based Programmable Tactics RPG | *Final Fantasy XII* Gambits / *Dragon Age: Origins* Tactics style combat where players program party member behaviors using declarative `condition` / `action` rules (e.g., `Healer: condition = any(party, p: p.health < 20%)`). | — |
 
 ---
 
@@ -35,8 +34,31 @@ Each idea is tracked and expanded as a structured [GitHub Issue](https://github.
 
 ---
 
+## 🎓 Graduated & Closed Ideas
+
+Ideas that have been expanded and spun out into dedicated repositories:
+
+| Issue | Concept | Category | Summary | Graduated Repo |
+| :--- | :--- | :--- | :--- | :--- |
+| **[#1](https://github.com/johnstrand/ideas/issues/1)** | **Space war sim thingy** | 3D Tactical Fleet Command + Sector Roguelite | *Homeworld* / *Nebulous: Fleet Command* style 3D positional combat with Tactical Pause, signature/E-warfare shenanigans (radar spoofing, cold-drift ambushes, active jamming), physicalized ballistics, localized subsystem damage, and a persistent ragtag fleet campaign. | **[`this-fleet-of-mine`](https://github.com/johnstrand/this-fleet-of-mine)** (`ThisFleetOfMine`) |
+| **[#2](https://github.com/johnstrand/ideas/issues/2)** | **3D first person asteroids** | 6DoF Cockpit Arcade Roguelite | Classic toroidal wrap-around *Asteroids* reimagined inside a diegetic 3D fighter cockpit with a 3D holographic radar globe, toggleable Flight-Assist / Newtonian drift, momentum-conserving rock fracturing, ore-driven between-wave upgrades, and UFO hunter/boss waves. | **[`asteroids-3d`](https://github.com/johnstrand/asteroids-3d)** (`Asteroids3d`) |
+| **[#7](https://github.com/johnstrand/ideas/issues/7)** | **Simple 3d editor for games** | 3D Level & Blockout Editor | Cross between *TrenchBroom* and *Blender* built on a headless half-edge N-gon mesh kernel: single-viewport perspective/ortho navigation, draggable 3D gizmos + `G`/`R`/`S` axis/plane constraints, parametric primitives, CSG booleans, auto-projected UVs, gameplay entities, walk-mode preview, and dual-layer `.level.json` export. | **[`leed-3d`](https://github.com/johnstrand/leed-3d)** (`Leed3d`) |
+
+---
+
+## ⚡ Agent Runner Template (`run-agent.ps1`)
+
+[`run-agent.ps1`](./run-agent.ps1) is the canonical Antigravity CLI (`agy`) issue runner template used across graduated projects (adapted from `RootinTootin3d/run-agent.ps1`). Copy it into any project repository to automate sequential issue execution:
+
+- **Dependency Unblocking (`on hold` → `ready`)**: Inspects open `on hold` issues (skipping those labeled `review needed` or `question`) and automatically promotes them to `ready` once all `Depends on: #...` prerequisites are closed—or closes `Tracking Epic: true` issues once all sub-issues finish.
+- **Model & Effort Routing**: Picks the lowest-numbered open `ready` issue and extracts the target model and effort from `<model>-<effort>` labels (e.g., `gemini-4-argon-high`).
+- **Real-Time Streaming & Session Persistence**: Streams NDJSON tool calls and responses to the console while persisting the active conversation ID in `.agy_session` across issues.
+- **Post-Run Safeguards**: Automatically commits, pushes to the active branch (`main`/`master`), closes the completed issue, and re-evaluates blocked downstream issues. Use `-Loop` for continuous execution or `-NewSession` to reset context.
+
+---
+
 ## 🔄 Workflow
 
 1. **Capture**: Drop raw sparks and one-liners as new [Issues](https://github.com/johnstrand/ideas/issues/new).
 2. **Expand**: Flesh out the issue body into a structured design spec covering core pillars, technical architecture, and MVP milestones.
-3. **Graduate**: Spin the spec out into a dedicated repository (typically C# / .NET 10 / Raylib-cs for games, or .NET 10 CLI/Web for tools) or transfer the implementation checklist into the target repo.
+3. **Graduate**: Spin the spec out into a dedicated repository (typically C# / .NET 10 / Raylib-cs for games, or .NET 10 CLI/Web for tools), copy [`run-agent.ps1`](./run-agent.ps1) and tag issues with `ready` / `on hold` and `<model>-<effort>`, and close the incubator issue.
